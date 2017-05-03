@@ -1,0 +1,6 @@
+Flask
+gunicorn
+FLask-WTF
+peewee
+psycopg2
+flask-security
