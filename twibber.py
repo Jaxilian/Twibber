@@ -16,12 +16,9 @@ user_datastore = PeeweeUserDatastore(db, User, Role, UserRoles)
 security = Security(app, user_datastore)
 
 @app.route("/")
+@login_required
 def index():
-	logged_in = int(session.get("Logged_In", False))
-	if logged_in:
-		return render_template("index.html")
-	else:
-		return redirect(url_for('login'))
+	return render_template("index.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
