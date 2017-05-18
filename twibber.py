@@ -17,8 +17,11 @@ security = Security(app, user_datastore)
 
 @app.route("/")
 def index():
-
-	return render_template("index.html")
+	logged_in = int(session.get("Logged_In", False))
+	if logged_in:
+		return render_template("index.html")
+	else:
+		return redirect(url_for('login'))
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -28,6 +31,9 @@ def register():
 		return redirect(url_for('success'))
 	return render_template("register.html", register_form = register_form)
 
+@app.route("/login")
+def login():
+	return render_template("/security/login_user.html")
 
 @app.route("/success")
 def success():

@@ -1,0 +1,36 @@
+.contact_box{
+	background-color:#0d2449;
+	color:white;
+	margin-left:10%;
+	margin-right:10%;
+	padding-top:50px;
+	padding-bottom:100px;
+}
+.contact_box p{
+	font-family:"Courier New", Courier, monospace;
+	font-size:50px;
+}
+.contact_box form input{
+	margin-bottom:20px;
+	padding:20px;
+	border-style:none;
+	border-radius:10px;
+	outline:none;
+}
+.contact_box button{
+	padding-top: 15px;
+	padding-bottom:15px;
+	padding-left:40px;
+	padding-right:40px;
+	border-radius:20px;
+	margin-top:25px;
+	border-style:none;
+	background-color:#ff7700;
+	color:white;
+	outline:none!important;
+	cursor:pointer;
+}
+.contact_box a{
+	margin-top:20px;
+	text-decoration:none;
+}
