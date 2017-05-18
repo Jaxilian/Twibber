@@ -33,6 +33,7 @@ def register():
 
 @app.route("/login")
 def login():
+	session["Logged_In"] = 1 
 	return render_template("/security/login_user.html")
 
 @app.route("/success")
