@@ -9,7 +9,7 @@
 	.contact_box{
 		background-color:#0d2449;
 		color:white;
-		margin:10%;
+		margin:5%;
 		padding-top:50px;
 		padding-bottom:100px;
 		border-radius:30px;
@@ -48,9 +48,13 @@
 	}
 }
 @media (min-width: 300px) and (max-width:998px){
+	.city{
+		background-color: black;
+	}
 	.contact_box{
 		background-color:#0d2449;
 		color:white;
+		border-radius:30px;
 	}
 	.contact_box p{
 		font-family:"Courier New", Courier, monospace;
@@ -68,12 +72,15 @@
 		outline:none;
 	}
 	.contact_box button{
+		border-top:1px white solid;
 		padding-top: 15px;
 		padding-bottom:15px;
 		padding-left:40px;
 		padding-right:40px;
 		border-radius:20px;
+		width:90%;
 		margin-top:25px;
+		font-size:100px;
 		border-style:none;
 		background-color:#ff7700;
 		color:white;
