@@ -7,7 +7,7 @@
 	border-top-left-radius: 20px;
 	}
 	.contact_box{
-		background-color:#0d2449;
+		background-color:rgba(9,24,48,0.8);
 		color:white;
 		margin:5%;
 		padding-top:50px;
@@ -49,7 +49,11 @@
 }
 @media (min-width: 300px) and (max-width:998px){
 	.city{
-		background-color: black;
+		margin:0;
+		background:url(/static/Images/city.png) no-repeat center center fixed;
+		background-size: cover;
+		border-top-right-radius: 20px;
+		border-top-left-radius: 20px;
 	}
 	.contact_box{
 		background-color:#0d2449;
