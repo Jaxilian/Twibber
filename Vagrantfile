@@ -14,8 +14,8 @@ Vagrant.configure(2) do |config|
 	sudo pip3 install flask
 	sudo pip3 install -r /vagrant/requirements.txt
 	sudo su - postgres -c "createuser -s vagrant"
-    sudo su - postgres -c "createdb webapp"
-	(cd /vagrant && sudo python3 /vagrant/install.py)
+    sudo su - postgres -c "createdb Twibber"
+	sudo su - vagrant -c "python3 /vagrant/install.py"
   SHELL
   
 end

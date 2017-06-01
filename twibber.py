@@ -16,20 +16,29 @@ user_datastore = PeeweeUserDatastore(db, User, Role, UserRoles)
 security = Security(app, user_datastore)
 
 @app.route("/")
+@login_required
 def index():
+	session["Logged_In"] = 1 
 	return render_template("index.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
 	register_form = RegisterUser()
 	if register_form.validate_on_submit():
-		user_datastore.create_user(email=register_form.email.data,username = register_form.username.data, password=register_form.password.data, first_name = register_form.first_name.data, last_name = register_form.last_name.data)
+		user_datastore.create_user(
+			email=register_form.email.data,
+			username = register_form.username.data,
+			password = register_form.password.data,
+			first_name = register_form.first_name.data,
+			last_name = register_form.last_name.data
+			)
 		return redirect(url_for('success'))
+	print(register_form.errors)
 	return render_template("register.html", register_form = register_form)
 
 @app.route("/login")
 def login():
-	session["Logged_In"] = 1 
+	logged_in = int(session.get("Logged_In", False))
 	return render_template("/security/login_user.html")
 
 @app.route("/success")

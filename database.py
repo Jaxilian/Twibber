@@ -11,6 +11,15 @@ else:
 	DATABASE = 'Twibber'
 	db = PostgresqlDatabase(DATABASE)
 
+class Contact(Model):
+	first_name = CharField()
+	last_name = CharField()
+	email = CharField()
+	message = CharField()
+	class Meta:
+		database = db
+
+
 class User(Model, UserMixin):
 	email = CharField(unique=True)
 	username = CharField(unique=True)

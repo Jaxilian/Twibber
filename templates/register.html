@@ -1,59 +1,71 @@
 {%extends "base.html"%}
 {%block content%}
 <body class="city">
-	<div class="contact_box">
-		<form action="{{ url_for('register') }}" method="POST">
-			<ul class="Form_Titles">
-				<li>{{ register_form.email.label }}</li>
-				{% if register_form.errors.email %}
-				{% for error in register_form.errors.email %}
-				<li class="errors">{{ error }}</li>
-				{% endfor %}
-				{% endif %}
-			</ul>
-			{{ register_form.email }}
-			<ul class="Form_Titles">
-				<li>{{ register_form.username.label }}</li>
-				{% if register_form.errors.username %}
-				{% for error in register_form.errors.username %}
-				<li class="errors">{{ error }}</li>
-				{% endfor %}
-				{% endif %}
-			</ul>
-			{{ register_form.username }}
-			<ul class="Form_Titles">
-				<li>{{ register_form.password.label }}</li>
-				{% if register_form.errors.password %}
-				{% for error in register_form.errors.password %}
-				<li class="errors">{{ error }}</li>
-				{% endfor %}
-				{% endif %}
-			</ul>
-			{{ register_form.password }}
-			<ul class="Form_Titles">
-				<li>{{ register_form.first_name.label }}</li>
-				{% if register_form.errors.first_name %}
-				{% for error in register_form.errors.first_name %}
-				<li class="errors">{{ error }}</li>
-				{% endfor %}
-				{% endif %}
-			</ul>
-			{{ register_form.first_name }}
-			<ul class="Form_Titles">
-				<li>{{ register_form.last_name.label }}</li>
-				{% if register_form.errors.last_name %}
-				{% for error in register_form.errors.last_name %}
-				<li class="errors">{{ error }}</li>
-				{% endfor %}
-				{% endif %}
-			</ul>
-			{{ register_form.last_name }}
-			<button class="blue_button" type="submit">Submit</button>
-		</form>
-		{% if register_form.errors %}
-		<p class="errors">Please correct the form.</p>
-		{% endif %}
-	</div>
+	<center>
+		<div class="contact_box">
+			<form action="{{ url_for('register') }}" method="POST">
+				{{ register_form.csrf_token }}
+				<ul class="Form_Titles">
+					<li>{{ register_form.email.label }}</li>
+					{% if register_form.errors.email %}
+					{% for error in register_form.errors.email %}
+					<li class="errors">{{ error }}</li>
+					{% endfor %}
+					{% endif %}
+				</ul>
+				{{ register_form.email }}
+				<ul class="Form_Titles">
+					<li>{{ register_form.username.label }}</li>
+					{% if register_form.errors.username %}
+					{% for error in register_form.errors.username %}
+					<li class="errors">{{ error }}</li>
+					{% endfor %}
+					{% endif %}
+				</ul>
+				{{ register_form.username }}
+				<ul class="Form_Titles">
+					<li>{{ register_form.password.label }}</li>
+					{% if register_form.errors.password %}
+					{% for error in register_form.errors.password %}
+					<li class="errors">{{ error }}</li>
+					{% endfor %}
+					{% endif %}
+				</ul>
+				{{ register_form.password }}
+				<ul class="Form_Titles">
+					<li>{{ register_form.confirm.label }}</li>
+					{% if register_form.errors.confirm %}
+					{% for error in register_form.errors.confirm %}
+					<li class="errors">{{ error }}</li>
+					{% endfor %}
+					{% endif %}
+				</ul>
+				{{ register_form.confirm }}
+				<ul class="Form_Titles">
+					<li>{{ register_form.first_name.label }}</li>
+					{% if register_form.errors.first_name %}
+					{% for error in register_form.errors.first_name %}
+					<li class="errors">{{ error }}</li>
+					{% endfor %}
+					{% endif %}
+				</ul>
+				{{ register_form.first_name }}
+				<ul class="Form_Titles">
+					<li>{{ register_form.last_name.label }}</li>
+					{% if register_form.errors.last_name %}
+					{% for error in register_form.errors.last_name %}
+					<li class="errors">{{ error }}</li>
+					{% endfor %}
+					{% endif %}
+				</ul>
+				{{ register_form.last_name }}
+				<button class="blue_button" type="submit">Submit</button>
+			</form>
+			{% if register_form.errors %}
+			<p class="errors">Please Correct the for</p>
+			{% endif %}
+		</div>
+	</center>
 </body>
 {%endblock%}
 
