@@ -19,7 +19,6 @@ class Contact(Model):
 	class Meta:
 		database = db
 
-
 class User(Model, UserMixin):
 	email = CharField(unique=True)
 	username = CharField(unique=True)
@@ -41,5 +40,11 @@ class UserRoles(Model):
 	role = ForeignKeyField(User, related_name="users")
 	name = property(lambda self: self.role.name)
 	description = property(lambda self: self.role.description)
+	class Meta:
+		database = db
+
+class Tweeb(Model):
+	author = ForeignKeyField(User, related_name="tweebs")
+	content = CharField()
 	class Meta:
 		database = db

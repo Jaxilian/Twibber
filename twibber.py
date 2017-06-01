@@ -23,35 +23,39 @@ def index():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-	register_form = RegisterUser()
-	if register_form.validate_on_submit():
-		user_datastore.create_user(
-			email=register_form.email.data,
-			username = register_form.username.data,
-			password = register_form.password.data,
-			first_name = register_form.first_name.data,
-			last_name = register_form.last_name.data
-			)
-		return redirect(url_for('success'))
-	print(register_form.errors)
-	return render_template("register.html", register_form = register_form)
+	if current_user.is_authenticated:
+		return redirect(url_for('index'))
+	else:
+		register_form = RegisterUser()
+		if register_form.validate_on_submit():
+			user_datastore.create_user(
+				email=register_form.email.data,
+				username = register_form.username.data,
+				password = register_form.password.data,
+				first_name = register_form.first_name.data,
+				last_name = register_form.last_name.data
+				)
+			return redirect(url_for('success'))
+		print(register_form.errors)
+		return render_template("register.html", register_form = register_form)
 
-@app.route("/login")
-def login():
-	logged_in = int(session.get("Logged_In", False))
-	return render_template("/security/login_user.html")
-
-@app.route("/success")
-def success():
-	return render_template("success.html")
-
-@app.route("/home")
-@login_required
-def home():
-	user = current_user()
-	return render_template("home.html", user=user)
-
-
+@app.route("/user/<username>", methods=["GET", "POST"])
+def user_profile(username):
+	user = User.select().where(User.username==username)[0]
+	tweebs = Tweeb.select().order_by(-Tweeb.id)
+	try:
+		if current_user == user:
+			tweeb_form = PostTweeb()
+			if tweeb_form.validate_on_submit():
+				Tweeb.create(
+					author=current_user.id,
+					content=tweeb_form.content.data
+					)
+			return render_template("user_template.html",tweeb_form=tweeb_form,tweebs=tweebs, user=user, editor=True)
+		else:
+			return render_template("user_template.html",tweebs=tweebs, user=user)
+	except IndexError:
+		return render_template("user_not_found.html")
 
 
 

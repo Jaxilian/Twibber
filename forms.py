@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import Form, StringField, validators, PasswordField, TextField, TextAreaField
 from wtforms.fields.html5 import EmailField
 
@@ -19,3 +20,7 @@ class ContactForm(FlaskForm):
 	last_name = StringField('Last Name', [validators.InputRequired(), validators.Length(min=2, max=20)])
 	email = EmailField('Email address', [validators.InputRequired(), validators.Email()])
 	message = TextAreaField('Message', [validators.InputRequired(), validators.Length(min=2, max=800)])
+
+class PostTweeb(FlaskForm):
+	content = TextAreaField('Content', [validators.InputRequired(), validators.Length(min=3, max=400)])
+

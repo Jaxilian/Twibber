@@ -1,4 +1,4 @@
-from database import db, User, Role, UserRoles
+from database import db, User, Role, UserRoles, Contact,Tweeb
 
 db.connect()
-db.create_tables([User, Role, UserRoles], safe=True)
+db.create_tables([User, Role, UserRoles, Contact, Tweeb], safe=True)

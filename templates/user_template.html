@@ -1,0 +1,33 @@
+{%extends "base.html"%}
+{%block content%}
+<body>
+<h1>{{user.username}}'s tweebs</h1>
+
+{%if editor%}
+	<form action="" method="POST">
+	{{tweeb_form.csrf_token}}
+		<ul class="Form_Titles">
+			<li>{{ tweeb_form.content.label }}</li>
+				{{tweeb_form.content}}
+				{% if tweeb_form.errors.content %}
+				{% for error in tweeb_form.errors.content %}
+			<li class="errors">{{ error }}</li>
+				{% endfor %}
+				{% endif %}
+		</ul>
+		<button class="blue_button" type="submit">Submit</button>
+	</form>
+	{% if tweeb_form.errors %}
+	<p class="errors">Please correct the form.</p>
+	{% endif %}
+{%endif%}
+
+{% for tweeb in user.tweebs %}
+	<hr>
+	<h4>{{tweeb.author.username}}</h4>
+	<p>{{tweeb.content}}</p>
+{% endfor %}
+
+</body>
+{%endblock%}
+
