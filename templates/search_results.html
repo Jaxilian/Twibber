@@ -1,0 +1,18 @@
+{%extends "user_base.html"%}
+{%block content%}
+<div>
+	<h1>Who/what are you looking for?</h1>
+	<form action="{{ url_for('search') }}" method="POST">
+		{{ search_form.csrf_token }}
+		{{ search_form.search_content.label }}
+		{{search_form.search_content}}
+		{% if search_form.errors.search_content %}
+		{% for error in search_form.errors.search_content %}
+		{{ error }}
+		{% endfor %}
+		{% endif %}
+		<button class="blue_button" type="submit">Submit</button>
+	</form>
+	{{finding}}
+</div>
+{%endblock%}

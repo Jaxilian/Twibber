@@ -24,3 +24,6 @@ class ContactForm(FlaskForm):
 class PostTweeb(FlaskForm):
 	content = TextAreaField('Content', [validators.InputRequired(), validators.Length(min=3, max=400)])
 
+class SearchForm(FlaskForm):
+	search_content = TextAreaField('Search', [validators.InputRequired()])
+

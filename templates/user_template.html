@@ -1,32 +1,43 @@
 {%extends "base.html"%}
 {%block content%}
-<body>
-<h1>{{user.username}}'s tweebs</h1>
+<body class="city">
+<div class="flex">
+	<div class="left-nav">
+		<div class="list">
+			<input type="text" name="search" placeholder="Search..">
+			<a href="/"><p>Start</p></a>
+			<a href="/user/{{user.username}}"><p>Home</p></a>
+		</div>
+	</div>
+	<div class="right-content">
+		<h1>{{user.username}}'s tweebs</h1>
+		{%if editor%}
+			<form action="" method="POST">
+			{{tweeb_form.csrf_token}}
+				<ul class="Form_Titles">
+					<li>{{ tweeb_form.content.label }}</li>
+						{{tweeb_form.content}}
+						{% if tweeb_form.errors.content %}
+						{% for error in tweeb_form.errors.content %}
+					<li class="errors">{{ error }}</li>
+						{% endfor %}
+						{% endif %}
+				</ul>
+				<button class="blue_button" type="submit">Submit</button>
+			</form>
+			{% if tweeb_form.errors %}
+			<p class="errors">Please correct the form.</p>
+			{% endif %}
+		{%endif%}
 
-{%if editor%}
-	<form action="" method="POST">
-	{{tweeb_form.csrf_token}}
-		<ul class="Form_Titles">
-			<li>{{ tweeb_form.content.label }}</li>
-				{{tweeb_form.content}}
-				{% if tweeb_form.errors.content %}
-				{% for error in tweeb_form.errors.content %}
-			<li class="errors">{{ error }}</li>
-				{% endfor %}
-				{% endif %}
-		</ul>
-		<button class="blue_button" type="submit">Submit</button>
-	</form>
-	{% if tweeb_form.errors %}
-	<p class="errors">Please correct the form.</p>
-	{% endif %}
-{%endif%}
+		{% for tweeb in user.tweebs %}
+			<h4>{{tweeb.author.username}}</h4>
+			<p>{{tweeb.content}}</p>
+			<hr>
+		{% endfor %}
 
-{% for tweeb in user.tweebs %}
-	<hr>
-	<h4>{{tweeb.author.username}}</h4>
-	<p>{{tweeb.content}}</p>
-{% endfor %}
+	</div>
+</div>
 
 </body>
 {%endblock%}

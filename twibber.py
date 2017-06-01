@@ -19,7 +19,7 @@ security = Security(app, user_datastore)
 @login_required
 def index():
 	session["Logged_In"] = 1 
-	return render_template("index.html")
+	return render_template("index.html",user = current_user)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -35,7 +35,7 @@ def register():
 				first_name = register_form.first_name.data,
 				last_name = register_form.last_name.data
 				)
-			return redirect(url_for('success'))
+			return redirect(url_for('index'))
 		print(register_form.errors)
 		return render_template("register.html", register_form = register_form)
 
@@ -51,13 +51,20 @@ def user_profile(username):
 					author=current_user.id,
 					content=tweeb_form.content.data
 					)
+				return redirect(url_for('user_profile', username=username))
 			return render_template("user_template.html",tweeb_form=tweeb_form,tweebs=tweebs, user=user, editor=True)
 		else:
 			return render_template("user_template.html",tweebs=tweebs, user=user)
 	except IndexError:
 		return render_template("user_not_found.html")
 
-
+@app.route("/search", methods=["GET", "POST"])
+def search():
+	search_form = SearchForm()
+	if request.method == 'POST' and search_form.validate_on_submit():
+		search = search_form.search_content
+		finding = User.select().where(User.username==search)
+	return render_template("search_results.html",finding=finding, user = current_user, search_form = search_form)
 
 
 if __name__ == "__main__":
