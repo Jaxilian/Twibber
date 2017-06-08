@@ -18,7 +18,6 @@ security = Security(app, user_datastore)
 @app.route("/")
 @login_required
 def index():
-	session["Logged_In"] = 1 
 	return render_template("index.html",user = current_user)
 
 @app.route("/register", methods=["GET", "POST"])
